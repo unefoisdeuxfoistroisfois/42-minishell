@@ -24,7 +24,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "$$LOGO"
 	@echo "\033[1;32mLIASON DES OBJETS\033[0m"
-	$(CC) $(OBJ) $(CFLAGS) -o $@
+	$(CC) $(OBJ) $(CFLAGS) -o $@ -lreadline
 
 # .c -> .o
 %.o: %.c
