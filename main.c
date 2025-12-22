@@ -6,7 +6,7 @@
 /*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:12:28 by britela-          #+#    #+#             */
-/*   Updated: 2025/12/15 22:18:22 by britela-         ###   ########.fr       */
+/*   Updated: 2025/12/22 18:17:34 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ void	ft_ps1()
 	char	*line;
 
 	line = readline("minibiendur$ ");
+	if (line == NULL)
+	{
+		return ;
+	}
+	if (line[0] != '\0')
+	{
+		add_history(line);
+	}
 	free(line);
 }
 
