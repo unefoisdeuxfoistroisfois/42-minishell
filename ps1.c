@@ -6,7 +6,7 @@
 /*   By: britela- <britela-@student.42belgium.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 16:35:32 by britela-          #+#    #+#             */
-/*   Updated: 2025/12/22 21:18:48 by britela-         ###   ########.fr       */
+/*   Updated: 2025/12/24 19:50:09 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ void	ft_ps1()
 	{
 		add_history(line);
 	}
+	// debut de la lecture de notre commande
+	ft_lexer(line);
 	free(line);
 }
