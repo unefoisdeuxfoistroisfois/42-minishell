@@ -6,7 +6,7 @@
 /*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:12:58 by britela-          #+#    #+#             */
-/*   Updated: 2025/12/24 22:27:21 by britela-         ###   ########.fr       */
+/*   Updated: 2025/12/25 19:39:36 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "Libft/libft.h"
 
 // ps1.c
 void	ft_ps1();
