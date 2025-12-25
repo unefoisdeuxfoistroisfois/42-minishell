@@ -19,21 +19,30 @@ define LOGO
 endef
 export LOGO
 
+# Variable Libft
+LIBFT_DIR   = Libft
+LIBFT       = $(LIBFT_DIR)/libft.a
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$$LOGO"
 	@echo "\033[1;32mLIASON DES OBJETS\033[0m"
-	$(CC) $(OBJ) $(CFLAGS) -o $@ -lreadline
+	$(CC) $(OBJ) $(CFLAGS) -o $@ -L$(LIBFT_DIR) -lreadline
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
 # .c -> .o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
 	$(RM) $(OBJ)
 
 fclean: clean 
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all
