@@ -19,6 +19,23 @@
 # include <readline/history.h>
 # include "Libft/libft.h"
 
+// catégories de token
+typedef enum e_token_type
+{
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_REDIR_APPEND
+} token_type;
+
+typedef struct s_token
+{
+	token_type	type;
+	char	*value;
+	struct s_token	*next;
+} t_token;
+
 // ps1.c
 void	ft_ps1();
 
@@ -26,5 +43,9 @@ void	ft_ps1();
 void	ft_lexer(char *line);
 int	ft_space(char *str, int index);
 int	ft_word(char *str, int index);
+
+/* token.c */
+t_token *token_new(token_type type, char *value);
+void free_tokens(t_token *lst);
 
 #endif
