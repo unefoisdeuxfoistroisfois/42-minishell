@@ -1,6 +1,6 @@
 CC = cc
 NAME = minishell
-SRC = main.c ps1.c args.c
+SRC = main.c ps1.c args.c tokens.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g -I.
 
@@ -25,10 +25,10 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT)
 	@echo "$$LOGO"
 	@echo "\033[1;32mLIASON DES OBJETS\033[0m"
-	$(CC) $(OBJ) $(CFLAGS) -o $@ -L$(LIBFT_DIR) -lreadline
+	$(CC) $(OBJ) $(CFLAGS) -o $@ -L$(LIBFT_DIR) -lft -lreadline
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
