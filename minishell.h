@@ -40,12 +40,13 @@ typedef struct s_token
 void	ft_ps1();
 
 // args.c
-void	ft_lexer(char *line);
+t_token	*ft_lexer(char *line);
 int	ft_space(char *str, int index);
 int	ft_word(char *str, int index);
 
 /* token.c */
 t_token *token_new(token_type type, char *value);
+void token_add_back(t_token **lst, t_token *new);
 void free_tokens(t_token *lst);
 
 #endif
