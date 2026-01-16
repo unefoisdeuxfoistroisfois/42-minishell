@@ -29,7 +29,7 @@ int	ft_operateur(char *str, int index)
 	while (j < 5)
 	{
 		size = ft_strlen(taboperateur[j]);
-		if (ft_strcmp(&str[index], taboperateur[j], size) == 0);
+		if (ft_strncmp(&str[index], taboperateur[j], size) == 0)
 		{
 			return (size);
 		}
@@ -57,21 +57,46 @@ int	ft_space(char *str, int index)
 	return (index);
 }
 
-void	ft_lexer(char *line)
+t_token	*ft_lexer(char *line)
 {
+	t_token	*token;
+	t_token	*new_token;
 	int	i;
 	int	startword;
-
+	
+	token = NULL;
+	new_token = NULL;
 	i = 0;
 	while (line[i] != '\0')
 	{
 		i = ft_space(line, i);
-		ft_operateur(line, i);
-
+		if(ft_operateur(line, i) > 0) //si cest un operateur
+		{
+			if (!token)
+				token = new_token = token_new(TOKEN_PIPE, ft_substr(line, i, ft_operateur(line, i)));
+			else
+			{
+				new_token->next = token_new(TOKEN_PIPE, ft_substr(line, i, ft_operateur(line, i)));
+				new_token = new_token->next;
+			}
+			i = i + ft_operateur(line, i);
+		}
+		else if (line[i] != '\0' && line[i] != ' ') //si cest un mot
+		{
+			startword = i;
+			i = ft_word(line, i);
+			if (!token)
+				token = new_token = token_new(TOKEN_WORD, ft_substr(line, startword, i - startword));
+			else
+			{
+				new_token->next = token_new(TOKEN_WORD, ft_substr(line, startword, i - startword));
+				new_token = new_token->next;
+			}
+		}
+	}
 		// on mets un drapeau ou le mot commence 
 		startword = i;
 		i = ft_word(line, i);
-
 		// si notre i est toujours plus grand grace au nb de lettre lu
 		if (startword < i)
 		{
@@ -82,5 +107,5 @@ void	ft_lexer(char *line)
 			}
 			printf("\n");
 		}
-	}
+		return(token);
 }
