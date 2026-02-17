@@ -14,7 +14,7 @@ int	ft_operateur(char *str, int index)
 
 	j = 0;
 	//parcourir mon tableau d'operateur
-	while (j < 6)
+	while (j < 5)
 	{
 		size = ft_strlen(taboperateur[j]);
 		if (ft_strncmp(&str[index], taboperateur[j], size) == 0)
