@@ -33,6 +33,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR) bonus
 
 # .c -> .o
 %.o: %.c

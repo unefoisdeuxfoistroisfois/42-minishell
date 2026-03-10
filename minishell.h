@@ -7,6 +7,24 @@
 # include <readline/history.h>
 # include "Libft/libft.h"
 
+// Les types possible pour un token
+typedef enum e_token_type
+{
+	WORD, // 0
+	PIPE, // 1 |
+	REDIR_IN, // 2  <
+	REDIR_OUT, // 3 >
+	HEREDOC, // 4 <<
+	APPEND // 5 >>
+}	t_token_type;
+
+// Structure pour un token
+typedef struct s_token
+{
+	char			*value;
+	t_token_type	type;
+} t_token;
+
 // ps1.c
 void	ft_ps1();
 
