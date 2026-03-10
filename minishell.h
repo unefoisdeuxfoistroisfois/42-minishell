@@ -29,8 +29,9 @@ typedef struct s_token
 void	ft_ps1();
 
 // args.c
-void	ft_lexer(char *line);
+t_list	*ft_lexer(char *line);
 int	ft_space(char *str, int index);
 int	ft_word(char *str, int index);
+void	ft_print_tokens(t_list *tokens);
 
 #endif

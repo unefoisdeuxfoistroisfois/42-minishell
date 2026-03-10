@@ -3,6 +3,7 @@
 void	ft_ps1()
 {
 	char	*line;
+  t_list *tokens;
 
 	line = readline("minibiendur$ ");
 	if (line == NULL)
@@ -14,6 +15,7 @@ void	ft_ps1()
 		add_history(line);
 	}
 	// debut de la lecture de notre commande
-	ft_lexer(line);
+	tokens = ft_lexer(line);
+	ft_print_tokens(tokens);
 	free(line);
 }
