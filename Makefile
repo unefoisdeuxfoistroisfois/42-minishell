@@ -1,6 +1,6 @@
 CC = cc
 NAME = minishell
-SRC = main.c ps1.c args.c
+SRC = main.c ps1.c args.c tokens.c quotes.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
