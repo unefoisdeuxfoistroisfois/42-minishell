@@ -19,21 +19,21 @@ int	ft_word(char *str, int index)
 	while (str[index] != '\0' && bool == 1)
 	{
 		if ((str[index] == '\'' || str[index] == '"') && quote == 0)
-    {
+    	{
 			quote = str[index];
-    }
+    	}
 		else if (str[index] == quote)
-    {
+    	{
 			quote = 0;
-    }
+    	}
 		if (str[index] == ' ' && quote == 0)
-    {
-      bool = 0;
-    }
+    	{
+			bool = 0;
+    	}
 		if (ft_operateur(str, index) != 0 && quote == 0)
-    {
-      bool = 0;
-    }
+    	{
+			bool = 0;
+    	}
 		index++;
 	}
 	return (index);
