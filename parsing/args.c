@@ -12,10 +12,10 @@ int	ft_space(char *str, int index)
 int	ft_word(char *str, int index)
 {
 	char  quote;
-  int bool;
+	int bool;
 
 	quote = 0;
-  bool = 1;
+	bool = 1;
 	while (str[index] != '\0' && bool == 1)
 	{
 		if ((str[index] == '\'' || str[index] == '"') && quote == 0)
@@ -44,19 +44,21 @@ t_list	*ft_lexer(char *line)
 	t_list  *tokens;
 	t_list  *node;
 	t_token *tok;
-  char *tmp;
+	char *tmp;
 	char  *value;
 	int i;
 	int startword;
 	int op_size;
+	int	bool;
 
 	tokens = NULL;
 	i = 0;
-	while (line[i] != '\0')
+	bool = 1;
+	while (line[i] != '\0' && bool == 1)
 	{
 		i = ft_space(line, i);
 		if (line[i] == '\0')
-			break ;
+			bool = 0;
 		op_size = ft_operateur(line, i);
 		if (op_size != 0)
 		{

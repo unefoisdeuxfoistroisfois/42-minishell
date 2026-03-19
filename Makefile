@@ -1,8 +1,12 @@
 CC = cc
 NAME = minishell
-SRC = main.c ps1.c args.c tokens.c quotes.c
+SRC = main.c \
+      parsing/ps1.c \
+      parsing/args.c \
+      parsing/tokens.c \
+      parsing/quotes.c
 OBJ = $(SRC:.c=.o)
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -I./includes
 RM = rm -rf
 
 define LOGO

@@ -6,7 +6,9 @@ t_token	*ft_create_token(char *value, int type)
 
 	token = malloc(sizeof(t_token));
 	if (token == NULL)
+	{
 		return (NULL);
+	}
 	token->value = value;
 	token->type = type;
 	return (token);
