@@ -34,4 +34,15 @@ int	ft_space(char *str, int index);
 int	ft_word(char *str, int index);
 void	ft_print_tokens(t_list *tokens);
 
+// tokens.c
+t_token	*ft_create_token(char *value, int type);
+int		ft_get_op_type(char *str, int index);
+int		ft_operateur(char *str, int index);
+void	ft_print_tokens(t_list *tokens);
+
+// quotes.c
+char	*ft_remove_quotes(char *str);
+int	ft_check_quotes(char *str);
+
+
 #endif
