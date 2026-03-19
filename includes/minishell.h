@@ -5,7 +5,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "Libft/libft.h"
+# include "../Libft/libft.h" //le chemin que le minishell.h doit faire pour trouvé l'indclude de libft
 
 // Les types possible pour un token
 typedef enum e_token_type
@@ -29,7 +29,7 @@ typedef struct s_token
 void	ft_ps1();
 
 // args.c
-t_list	*ft_lexer(char *line);
+t_list  *ft_lexer(char *line);
 int	ft_space(char *str, int index);
 int	ft_word(char *str, int index);
 void	ft_print_tokens(t_list *tokens);
