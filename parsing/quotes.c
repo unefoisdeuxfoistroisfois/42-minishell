@@ -58,5 +58,5 @@ char  *ft_remove_quotes(char *str)
 		i++;
 	}
 	result[j] = '\0';
-  return (result);
+	return (result);
 }

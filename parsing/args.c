@@ -3,9 +3,9 @@
 int	ft_space(char *str, int index)
 {
 	while (str[index] == 32)
-  {
-    index++;
-  }
+	{
+		index++;
+	}
 	return (index);
 }
 
@@ -19,21 +19,21 @@ int	ft_word(char *str, int index)
 	while (str[index] != '\0' && bool == 1)
 	{
 		if ((str[index] == '\'' || str[index] == '"') && quote == 0)
-    {
+    	{
 			quote = str[index];
-    }
+    	}
 		else if (str[index] == quote)
-    {
+    	{
 			quote = 0;
-    }
+    	}
 		if (str[index] == ' ' && quote == 0)
-    {
-      bool = 0;
-    }
+    	{
+			bool = 0;
+		}
 		if (ft_operateur(str, index) != 0 && quote == 0)
-    {
-      bool = 0;
-    }
+		{
+			bool = 0;
+		}
 		index++;
 	}
 	return (index);
@@ -73,9 +73,9 @@ t_list	*ft_lexer(char *line)
 			startword = i;
 			i = ft_word(line, i);
 			value = ft_substr(line, startword, i - startword);
-      tmp = value;
-      value = ft_remove_quotes(value);  // ajoute cette ligne
-      free(tmp);
+      		tmp = value;
+      		value = ft_remove_quotes(value);  // ajoute cette ligne
+      		free(tmp);
 			tok = ft_create_token(value, WORD);
 			node = ft_lstnew(tok);
 			ft_lstadd_back(&tokens, node);
