@@ -41,9 +41,9 @@ int	ft_word(char *str, int index)
 
 t_list	*ft_lexer(char *line)
 {
-	t_list  *tokens;
+	t_list  *list;
 	t_list  *node;
-	t_token *tok;
+	t_token *token;
 	char *tmp;
 	char  *value;
 	int i;
@@ -51,7 +51,7 @@ t_list	*ft_lexer(char *line)
 	int op_size;
 	int	bool;
 
-	tokens = NULL;
+	list = NULL;
 	i = 0;
 	bool = 1;
 	while (line[i] != '\0' && bool == 1)
@@ -63,9 +63,9 @@ t_list	*ft_lexer(char *line)
 		if (op_size != 0)
 		{
 			value = ft_substr(line, i, op_size);
-			tok = ft_create_token(value, ft_get_op_type(line, i));
-			node = ft_lstnew(tok);
-			ft_lstadd_back(&tokens, node);
+			token = ft_create_token(value, ft_get_op_type(line, i));
+			node = ft_lstnew(token);
+			ft_lstadd_back(&list, node);
 			i = i + op_size;
 		}
 		else
@@ -76,10 +76,10 @@ t_list	*ft_lexer(char *line)
 			tmp = value;
 			value = ft_remove_quotes(value);
 			free(tmp);
-			tok = ft_create_token(value, WORD);
-			node = ft_lstnew(tok);
-			ft_lstadd_back(&tokens, node);
+			token = ft_create_token(value, WORD);
+			node = ft_lstnew(token);
+			ft_lstadd_back(&list, node);
 		}
 	}
-	return (tokens);
+	return (list);
 }

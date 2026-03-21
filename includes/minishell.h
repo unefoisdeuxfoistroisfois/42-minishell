@@ -32,7 +32,7 @@ void	ft_ps1();
 t_list  *ft_lexer(char *line);
 int	ft_space(char *str, int index);
 int	ft_word(char *str, int index);
-void	ft_print_tokens(t_list *tokens);
+void	ft_print_tokens(t_list *list);
 
 // tokens.c
 t_token	*ft_create_token(char *value, int type);

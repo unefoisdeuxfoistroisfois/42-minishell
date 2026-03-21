@@ -44,14 +44,14 @@ int	ft_operateur(char *str, int index)
 	return (0);
 }
 
-void	ft_print_tokens(t_list *tokens)
+void	ft_print_tokens(t_list *list)
 {
-	t_token	*tok;
+	t_token	*token;
 
-	while (tokens != NULL)
+	while (list != NULL)
 	{
-		tok = (t_token *)tokens->content;
-		printf("type: %d | value: %s\n", tok->type, tok->value);
-		tokens = tokens->next;
+		token = (t_token *)list->content;
+		printf("type: %d | value: %s\n", token->type, token->value);
+		list = list->next;
 	}
 }
