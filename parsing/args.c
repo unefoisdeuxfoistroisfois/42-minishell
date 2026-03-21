@@ -29,11 +29,19 @@ int	ft_word(char *str, int index)
 		if (str[index] == ' ' && quote == 0)
     	{
 			bool = 0;
+<<<<<<< HEAD
 		}
 		if (ft_operateur(str, index) != 0 && quote == 0)
 		{
 			bool = 0;
 		}
+=======
+    	}
+		if (ft_operateur(str, index) != 0 && quote == 0)
+    	{
+			bool = 0;
+    	}
+>>>>>>> 1ad3797fd6df204c0eddbf2e9f594646d3b35d2c
 		index++;
 	}
 	return (index);

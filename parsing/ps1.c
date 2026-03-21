@@ -14,6 +14,7 @@ void	ft_ps1()
 	{
 		add_history(line);
 	}
+<<<<<<< HEAD
 
 	if (ft_check_quotes(line) == 1)
   	{
@@ -21,6 +22,15 @@ void	ft_ps1()
   		free(line);
   		return ;
   	}
+=======
+	
+	if (ft_check_quotes(line) == 1)
+	{
+  		printf("minishell: syntax error: unclosed quote\n");
+  		free(line);
+  		return ;
+	}
+>>>>>>> 1ad3797fd6df204c0eddbf2e9f594646d3b35d2c
   	tokens = ft_lexer(line);
 	// debut de la lecture de notre commande
 	tokens = ft_lexer(line);
