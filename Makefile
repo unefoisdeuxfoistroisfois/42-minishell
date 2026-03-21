@@ -1,10 +1,10 @@
 CC = cc
 NAME = minishell
-SRC = main.c \
-      parsing/ps1.c \
-      parsing/args.c \
-      parsing/tokens.c \
-      parsing/quotes.c
+SRC = src/main.c \
+      src/parsing/ps1.c \
+      src/parsing/args.c \
+      src/parsing/tokens.c \
+      src/parsing/quotes.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g -I./includes
 RM = rm -rf

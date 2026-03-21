@@ -73,9 +73,9 @@ t_list	*ft_lexer(char *line)
 			startword = i;
 			i = ft_word(line, i);
 			value = ft_substr(line, startword, i - startword);
-      			tmp = value;
-      			value = ft_remove_quotes(value);
-      			free(tmp);
+			tmp = value;
+			value = ft_remove_quotes(value);
+			free(tmp);
 			tok = ft_create_token(value, WORD);
 			node = ft_lstnew(tok);
 			ft_lstadd_back(&tokens, node);
