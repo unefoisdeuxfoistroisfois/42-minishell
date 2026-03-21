@@ -44,5 +44,7 @@ void	ft_print_tokens(t_list *tokens);
 char	*ft_remove_quotes(char *str);
 int	ft_check_quotes(char *str);
 
+// expand.c
+int ft_is_dollar(char *str);
 
 #endif
