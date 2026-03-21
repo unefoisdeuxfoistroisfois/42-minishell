@@ -4,7 +4,9 @@ SRC = src/main.c \
       src/parsing/ps1.c \
       src/parsing/args.c \
       src/parsing/tokens.c \
-      src/parsing/quotes.c
+      src/parsing/quotes.c \
+      src/parsing/expand.c
+
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g -I./includes
 RM = rm -rf
