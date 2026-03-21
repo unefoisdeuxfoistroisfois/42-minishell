@@ -3,7 +3,8 @@
 void	ft_ps1()
 {
 	char	*line;
-	t_list *tokens;
+	t_list	*tokens;
+	t_token	*tok;
 
 	line = readline("minibiendur$ ");
 	if (line == NULL)
@@ -21,9 +22,11 @@ void	ft_ps1()
   		free(line);
   		return ;
   	}
-  	tokens = ft_lexer(line);
 	// debut de la lecture de notre commande
 	tokens = ft_lexer(line);
+	tok = (t_token *)tokens->content;
+	if (ft_is_dollar(tok->value) == 1)
+		printf("Dollar trouvé!\n");
 	ft_print_tokens(tokens);
 	free(line);
 }
