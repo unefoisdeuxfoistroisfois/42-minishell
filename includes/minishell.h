@@ -47,5 +47,14 @@ int	ft_check_quotes(char *str);
 // expand.c
 int ft_is_dollar(char *str);
 int	ft_var_len(char *str, int start);
+char	*ft_get_var_value(char *str, int start, int len);
+char	*ft_expand_str(char *str);
+
+// expand_utlis.c
+char	*ft_strjoin_free(char *s1, char *s2);
+char	*ft_addchar(char *str, char c);
+
+//syntax.c
+int	ft_check_syntax(t_list *list);
 
 #endif
