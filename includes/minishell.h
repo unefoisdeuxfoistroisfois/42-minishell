@@ -46,5 +46,6 @@ int	ft_check_quotes(char *str);
 
 // expand.c
 int ft_is_dollar(char *str);
+int	ft_var_len(char *str, int start);
 
 #endif
