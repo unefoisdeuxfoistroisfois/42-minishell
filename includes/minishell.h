@@ -57,4 +57,9 @@ char	*ft_addchar(char *str, char c);
 //syntax.c
 int	ft_check_syntax(t_list *list);
 
+// error.c
+void	ft_error_token(char *token);
+void	ft_error_newline(void);
+void	ft_error_quote(void);
+
 #endif
