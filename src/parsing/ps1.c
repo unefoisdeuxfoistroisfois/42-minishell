@@ -26,7 +26,10 @@ void	ft_ps1()
 	list = ft_lexer(line);
 	token = (t_token *)list->content;
 	if (ft_is_dollar(token->value) == 1)
+	{
 		printf("Dollar trouvé!\n");
+		printf("Longueur var: %d\n", ft_var_len(token->value, 1));  // 1 = après le $
+	}
 	ft_print_tokens(list);
 	free(line);
 }
