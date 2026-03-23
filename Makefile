@@ -5,8 +5,9 @@ SRC = src/main.c \
       src/parsing/args.c \
       src/parsing/tokens.c \
       src/parsing/quotes.c \
-      src/parsing/expand.c
-
+      src/parsing/expand.c \
+	  src/parsing/expand_utils.c \
+	  src/parsing/syntax.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g -I./includes
 RM = rm -rf
