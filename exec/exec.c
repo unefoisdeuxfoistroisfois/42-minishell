@@ -1,15 +1,15 @@
 #include "../minishell.h"
 #include <fcntl.h>
+#include <errno.h>
 
-static int	ft_redirect_input(t_cmd *command)
+static int	open_input_file(t_cmd *command)
 {
-	// Redirige stdin vers le fichier d'entrée
 	int	fd;
 
-	fd = open(command->input_file, O_RDONLY);
+	fd = open(command->infile, O_RDONLY);
 	if (fd < 0)
 	{
-		perror(command->input_file);
+		perror(command->infile);
 		return (-1);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
@@ -22,18 +22,17 @@ static int	ft_redirect_input(t_cmd *command)
 	return (0);
 }
 
-static int	ft_redirect_output(t_cmd *command)
+static int	open_output_file(t_cmd *command)
 {
-	// Redirige stdout vers le fichier de sortie, avec ajout si spécifié
 	int	fd;
 
 	if (command->append)
-		fd = open(command->output_file, O_WRONLY | O_CREAT | O_APPEND, 0666);
+		fd = open(command->outfile, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	else
-		fd = open(command->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		fd = open(command->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd < 0)
 	{
-		perror(command->output_file);
+		perror(command->outfile);
 		return (-1);
 	}
 	if (dup2(fd, STDOUT_FILENO) < 0)
@@ -48,51 +47,43 @@ static int	ft_redirect_output(t_cmd *command)
 
 int	ft_apply_redirections(t_cmd *command)
 {
-	// Applique les redirections d'entrée et de sortie pour la commande
-	if (command->input_file && ft_redirect_input(command) < 0)
+	if (command->infile && open_input_file(command) < 0)
 		return (-1);
-	if (command->output_file && ft_redirect_output(command) < 0)
+	if (command->outfile && open_output_file(command) < 0)
 		return (-1);
 	return (0);
 }
-static void	ft_execute_child(t_cmd *cmd)
-{
-	// Exécute la commande dans le processus enfant après application des redirections
-	if (ft_apply_redirections(cmd) < 0)
-		exit(1);
-	execvp(cmd->args[0], cmd->args);
-	perror("execvp");
-	exit(127);
-}
 
-int	ft_execute_simple_cmd(t_cmd *command)
+static int	simple_command_runner(t_cmd *command)
 {
-	// Fork et exécute une commande simple, en attendant la fin
 	pid_t	pid;
-	int		stat;
+	int		status;
 
-	if (!command || !command->args[0])
-		return (-1);
+	if (!command || !command->args || !command->args[0])
+		return (0);
+	if (ft_is_builtin(command->args[0]))
+	{
+		if (ft_apply_redirections(command) < 0)
+			return (1);
+		status = ft_run_builtin(command);
+		g_signal = (status == 0);
+		return (status);
+	}
 	pid = fork();
 	if (pid < 0)
-	{
-		perror("fork");
-		return (-1);
-	}
+		return (perror("fork"), -1);
 	if (pid == 0)
 	{
-		ft_execute_child(command);
+		if (ft_apply_redirections(command) < 0)
+			exit(1);
+		execvp(command->args[0], command->args);
+		perror("execvp");
+		exit(127);
 	}
-	if (waitpid(pid, &stat, 0) < 0)
-	{
-		perror("waitpid");
-		return (-1);
-	}
-	if (stat == 0)
-		g_signal = 0;
-	else
-		g_signal = 1;
-	return (0);
+	if (waitpid(pid, &status, 0) < 0)
+		return (perror("waitpid"), -1);
+	g_signal = (WIFEXITED(status) && WEXITSTATUS(status) == 0) ? 0 : 1;
+	return (WIFEXITED(status) ? WEXITSTATUS(status) : 1);
 }
 
 int	ft_execute(t_cmd *commands)
@@ -101,5 +92,5 @@ int	ft_execute(t_cmd *commands)
 		return (0);
 	if (commands->next)
 		return (ft_execute_pipeline(commands));
-	return (ft_execute_simple_cmd(commands));
+	return (simple_command_runner(commands));
 }

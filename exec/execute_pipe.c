@@ -1,7 +1,6 @@
 #include "../minishell.h"
-#include <fcntl.h>
 
-static void	ft_child_pipeline(t_cmd *command, int input_fd, int *pipe_fd)
+static void	pipe_child(t_cmd *command, int input_fd, int *pipe_fd)
 {
 	if (input_fd != -1)
 	{
@@ -16,12 +15,14 @@ static void	ft_child_pipeline(t_cmd *command, int input_fd, int *pipe_fd)
 	}
 	if (ft_apply_redirections(command) < 0)
 		exit(1);
+	if (ft_is_builtin(command->args[0]))
+		exit(ft_run_builtin(command));
 	execvp(command->args[0], command->args);
 	perror("execvp");
 	exit(127);
 }
 
-static int	ft_fork_pipeline_cmd(t_cmd *command, int input_fd, int *pipe_fd)
+static int	fork_pipeline_command(t_cmd *command, int input_fd, int *pipe_fd)
 {
 	pid_t	pid;
 
@@ -29,7 +30,7 @@ static int	ft_fork_pipeline_cmd(t_cmd *command, int input_fd, int *pipe_fd)
 	if (pid < 0)
 		return (perror("fork"), -1);
 	if (pid == 0)
-		ft_child_pipeline(command, input_fd, pipe_fd);
+		pipe_child(command, input_fd, pipe_fd);
 	return (0);
 }
 
@@ -46,7 +47,7 @@ int	ft_execute_pipeline(t_cmd *cmds)
 	{
 		if (command->next && pipe(pipe_fd) < 0)
 			return (perror("pipe"), -1);
-		if (ft_fork_pipeline_cmd(command, input_fd, pipe_fd) < 0)
+		if (fork_pipeline_command(command, input_fd, pipe_fd) < 0)
 			return (-1);
 		if (input_fd != -1)
 			close(input_fd);
@@ -59,7 +60,7 @@ int	ft_execute_pipeline(t_cmd *cmds)
 	}
 	while (wait(&wait_status) > 0)
 		;
-	if (wait_status == 0)
+	if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == 0)
 		g_signal = 0;
 	else
 		g_signal = 1;
