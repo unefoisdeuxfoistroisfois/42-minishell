@@ -25,6 +25,17 @@ typedef struct s_token
 	t_token_type	type;
 } t_token;
 
+typedef struct s_cmd
+{
+	char			**args;
+	char			*infile;
+	char			*outfile;
+	int				append;
+	int				heredoc;
+	char			*delimiter;
+	struct s_cmd	*next;
+}	t_cmd;
+
 // ps1.c
 void	ft_ps1();
 
@@ -61,5 +72,14 @@ int	ft_check_syntax(t_list *list);
 void	ft_error_token(char *token);
 void	ft_error_newline(void);
 void	ft_error_quote(void);
+
+// parser.c
+t_cmd	*ft_create_cmd(void);
+t_cmd	*ft_parse_cmd(t_list **list);
+t_cmd	*ft_parser(t_list *list);
+
+// parser2.c
+void	ft_redir(t_cmd *cmd, t_list **list);
+char	**ft_add_word(char **args, char *word);
 
 #endif
