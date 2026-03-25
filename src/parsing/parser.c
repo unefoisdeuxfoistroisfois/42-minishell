@@ -59,7 +59,9 @@ t_cmd	*ft_create_cmd(void)
 
 	cmd = malloc(sizeof(t_cmd));
 	if (cmd == NULL)
+    {
 		return (NULL);
+    }
 	cmd->args = NULL;
 	cmd->infile = NULL;
 	cmd->outfile = NULL;
