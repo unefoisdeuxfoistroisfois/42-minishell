@@ -9,6 +9,8 @@ SRC = src/main.c \
 	  src/parsing/expand_utils.c \
 	  src/parsing/syntax.c \
 	  src/parsing/error.c \
+	  src/parsing/parser.c \
+	  src/parsing/parser2.c \
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g -I./includes
