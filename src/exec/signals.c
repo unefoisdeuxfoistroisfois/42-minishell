@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 12:00:00 by oussama          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../minishell.h"
+#include "minishell.h"
 
 /*
 ** Handler pour SIGINT (ctrl-C)
@@ -23,7 +11,7 @@ void	ft_signal_handler(int sig)
 		g_exit_status = 130;
 		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
+//		rl_replace_line("", 0); pour macos
 		rl_redisplay();
 	}
 }

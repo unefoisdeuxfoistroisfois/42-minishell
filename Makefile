@@ -11,6 +11,22 @@ SRC = src/main.c \
 	  src/parsing/error.c \
 	  src/parsing/parser.c \
 	  src/parsing/parser2.c \
+	  src/exec/exec.c \
+      src/exec/exec_simple.c \
+      src/exec/exec_pipeline.c \
+      src/exec/exec_cmd.c \
+      src/exec/exec_path.c \
+      src/exec/exec_redir.c \
+      src/exec/exec_heredoc.c \
+      src/exec/builtins.c \
+      src/exec/builtin_echo.c \
+      src/exec/builtin_cd.c \
+      src/exec/builtin_pwd.c \
+      src/exec/builtin_env.c \
+      src/exec/builtin_export.c \
+      src/exec/builtin_unset.c \
+      src/exec/builtin_exit.c \
+      src/exec/signals.c
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g -I./includes

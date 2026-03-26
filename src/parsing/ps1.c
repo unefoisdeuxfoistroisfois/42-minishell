@@ -1,31 +1,6 @@
 #include "minishell.h"
 
-void	ft_print_cmd(t_cmd *cmd)
-{
-	int	i;
-
-	while (cmd != NULL)
-	{
-		printf("=== CMD ===\n");
-		if (cmd->args != NULL)
-		{
-			i = 0;
-			while (cmd->args[i] != NULL)
-			{
-				printf("args[%d]: %s\n", i, cmd->args[i]);
-				i++;
-			}
-		}
-		printf("infile: %s\n", cmd->infile);
-		printf("outfile: %s\n", cmd->outfile);
-		printf("append: %d\n", cmd->append);
-		printf("heredoc: %d\n", cmd->heredoc);
-		printf("delimiter: %s\n", cmd->delimiter);
-		cmd = cmd->next;
-	}
-}
-
-void	ft_ps1()
+void	ft_ps1(void)
 {
 	char	*line;
 	t_list	*list;
@@ -34,27 +9,26 @@ void	ft_ps1()
 	line = readline("minibiendur$ ");
 	if (line == NULL)
 	{
-		return ;
+		ft_putstr_fd("exit\n", 1);
+		exit(g_exit_status);
 	}
 	if (line[0] != '\0')
-	{
 		add_history(line);
-	}
 	if (ft_check_quotes(line) == 1)
-  	{
+	{
 		ft_error_quote();
-  		free(line);
-  		return ;
-  	}
-	// debut de la lecture de notre commande
+		g_exit_status = 2;
+		free(line);
+		return ;
+	}
 	list = ft_lexer(line);
 	if (ft_check_syntax(list) == 1)
 	{
+		g_exit_status = 2;
 		free(line);
 		return ;
 	}
 	cmd = ft_parser(list);
-	ft_print_cmd(cmd);
-
+	ft_execute(cmd);
 	free(line);
 }

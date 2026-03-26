@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 12:00:00 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/26 12:00:00 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:24:05 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ int		ft_builtin_exit(t_cmd *cmd);
 void	ft_setup_signals(void);
 void	ft_signal_handler(int sig);
 void	ft_signal_heredoc(void);
+//void	rl_replace_line(const char *text, int clear_undo);
+
 
 /* ============== UTILS ============== */
 

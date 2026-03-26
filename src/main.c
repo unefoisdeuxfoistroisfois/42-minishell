@@ -1,13 +1,13 @@
 #include "minishell.h"
 
+int	g_exit_status = 0;
+
 int	main(int argc, char **argv)
 {
-	int	ninfini;
 	(void)argc;
 	(void)argv;
-
-	ninfini = 1;
-	while(ninfini)
+	ft_setup_signals();
+	while (1)
 	{
 		ft_ps1();
 	}
