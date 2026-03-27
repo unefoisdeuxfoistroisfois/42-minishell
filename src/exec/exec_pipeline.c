@@ -1,24 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_pipeline.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:53 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-/*
-** Processus enfant dans un pipe
-** - Configure stdin depuis input_fd
-** - Configure stdout vers pipe_fd[1] si y'a une commande suivante
-** - Applique les redirections
-** - Exécute la commande
-*/
 static void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
 {
 	if (input_fd != -1)
@@ -44,9 +25,6 @@ static void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
 	ft_exec_cmd(cmd);
 }
 
-/*
-** Fork une commande dans le pipeline
-*/
 static int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
 {
 	pid_t	pid;
@@ -62,10 +40,6 @@ static int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
 	return (0);
 }
 
-/*
-** Attend tous les processus enfants
-** Retourne le code de sortie du dernier
-*/
 static int	ft_wait_all(void)
 {
 	int		status;
@@ -85,10 +59,6 @@ static int	ft_wait_all(void)
 	return (last_status);
 }
 
-/*
-** Exécute un pipeline de commandes
-** ls -la | grep test | wc -l
-*/
 int	ft_exec_pipeline(t_cmd *cmds)
 {
 	int		pipe_fd[2];

@@ -1,25 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_simple.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:51 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 extern char	**environ;
 
-/*
-** Exécute une commande simple (sans pipe)
-** - Gère le heredoc si nécessaire
-** - Builtin → exécute dans le processus parent
-** - Externe → fork + execve
-*/
 int	ft_exec_simple(t_cmd *cmd)
 {
 	pid_t	pid;

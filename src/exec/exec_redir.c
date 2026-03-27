@@ -1,21 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_redir.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:52 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-/*
-** Ouvre le fichier d'entrée et redirige stdin
-** < infile
-*/
 int	ft_open_infile(t_cmd *cmd)
 {
 	int	fd;
@@ -37,11 +21,6 @@ int	ft_open_infile(t_cmd *cmd)
 	return (0);
 }
 
-/*
-** Ouvre le fichier de sortie et redirige stdout
-** > outfile  (truncate)
-** >> outfile (append)
-*/
 int	ft_open_outfile(t_cmd *cmd)
 {
 	int	fd;
@@ -69,9 +48,6 @@ int	ft_open_outfile(t_cmd *cmd)
 	return (0);
 }
 
-/*
-** Applique toutes les redirections d'une commande
-*/
 int	ft_apply_redirections(t_cmd *cmd)
 {
 	if (cmd->infile)

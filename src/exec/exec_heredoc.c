@@ -1,20 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_heredoc.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:55 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-/*
-** Vérifie si la ligne correspond au délimiteur
-*/
 static int	ft_is_delimiter(char *line, char *delimiter)
 {
 	int	len;
@@ -30,9 +15,6 @@ static int	ft_is_delimiter(char *line, char *delimiter)
 	return (0);
 }
 
-/*
-** Lit les lignes jusqu'au délimiteur et écrit dans le pipe
-*/
 static void	ft_read_heredoc(int write_fd, char *delimiter)
 {
 	char	*line;
@@ -51,11 +33,6 @@ static void	ft_read_heredoc(int write_fd, char *delimiter)
 	}
 }
 
-/*
-** Gère le heredoc
-** << delimiter
-** Lit l'input jusqu'au delimiter et redirige vers stdin
-*/
 int	ft_handle_heredoc(t_cmd *cmd)
 {
 	int	pipe_fd[2];

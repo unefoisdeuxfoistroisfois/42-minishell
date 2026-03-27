@@ -1,24 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:56 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 extern char	**environ;
 
-/*
-** Affiche l'erreur et exit avec le bon code
-** 127 = command not found
-** 126 = permission denied
-*/
 static void	ft_cmd_error(char *cmd, int code)
 {
 	ft_putstr_fd("minishell: ", 2);
@@ -32,11 +15,6 @@ static void	ft_cmd_error(char *cmd, int code)
 	exit(code);
 }
 
-/*
-** Exécute une commande externe avec execve
-** - Cherche le chemin dans PATH
-** - Si chemin absolu/relatif → utilise directement
-*/
 void	ft_exec_cmd(t_cmd *cmd)
 {
 	char	*path;

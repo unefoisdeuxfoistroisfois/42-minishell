@@ -1,20 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_path.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:54 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-/*
-** Libère un tableau de strings
-*/
 void	ft_free_split(char **split)
 {
 	int	i;
@@ -30,10 +15,6 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-/*
-** Récupère les dossiers du PATH
-** Retourne un tableau de strings ["usr/bin", "/bin", ...]
-*/
 char	**ft_get_path_dirs(void)
 {
 	char	*path_env;
@@ -46,9 +27,6 @@ char	**ft_get_path_dirs(void)
 	return (dirs);
 }
 
-/*
-** Construit le chemin complet : /usr/bin/ls
-*/
 static char	*ft_build_path(char *dir, char *cmd)
 {
 	char	*tmp;
@@ -62,10 +40,6 @@ static char	*ft_build_path(char *dir, char *cmd)
 	return (full_path);
 }
 
-/*
-** Cherche la commande dans les dossiers du PATH
-** Retourne le chemin complet si trouvé, NULL sinon
-*/
 char	*ft_find_path(char *cmd)
 {
 	char	**dirs;

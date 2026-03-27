@@ -1,9 +1,5 @@
 #include "minishell.h"
 
-/*
-** Handler pour SIGINT (ctrl-C)
-** Affiche un nouveau prompt
-*/
 void	ft_signal_handler(int sig)
 {
 	if (sig == SIGINT)
@@ -16,11 +12,6 @@ void	ft_signal_handler(int sig)
 	}
 }
 
-/*
-** Configure les signaux en mode interactif
-** ctrl-C → nouveau prompt
-** ctrl-\ → ignoré
-*/
 void	ft_setup_signals(void)
 {
 	struct sigaction	sa_int;
@@ -36,10 +27,6 @@ void	ft_setup_signals(void)
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
-/*
-** Configure les signaux pour le heredoc
-** ctrl-C → interrompt le heredoc
-*/
 void	ft_signal_heredoc(void)
 {
 	struct sigaction	sa;

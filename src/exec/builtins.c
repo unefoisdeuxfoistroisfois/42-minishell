@@ -1,20 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 12:00:00 by oussama           #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:56 by britela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-/*
-** Vérifie si la commande est un builtin
-*/
 int	ft_is_builtin(char *name)
 {
 	if (!name)
@@ -36,9 +21,6 @@ int	ft_is_builtin(char *name)
 	return (0);
 }
 
-/*
-** Exécute le builtin correspondant
-*/
 int	ft_run_builtin(t_cmd *cmd)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
