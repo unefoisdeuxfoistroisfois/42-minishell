@@ -44,6 +44,11 @@ char	*ft_get_var_value(char *str, int start, int len)
 	{
 		return (NULL);
 	}
+	if (ft_strncmp(var_name, "?", 2) == 0)
+	{
+		free(var_name);
+		return (ft_itoa(g_exit_status));
+	}
 	value = getenv(var_name);
 	free(var_name);
 	if (value == NULL)

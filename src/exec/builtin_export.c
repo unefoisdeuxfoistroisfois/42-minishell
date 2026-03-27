@@ -61,7 +61,6 @@ static int	ft_add_or_update_env(char *arg)
 	idx = ft_find_env_index(arg, name_len);
 	if (idx >= 0)
 	{
-		free(environ[idx]);
 		environ[idx] = ft_strdup(arg);
 		return (0);
 	}

@@ -21,7 +21,6 @@ static int	ft_find_env(char *name)
 
 static void	ft_remove_env(int idx)
 {
-	free(environ[idx]);
 	while (environ[idx])
 	{
 		environ[idx] = environ[idx + 1];
