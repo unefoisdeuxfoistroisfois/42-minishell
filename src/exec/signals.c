@@ -7,7 +7,9 @@ void	ft_signal_handler(int sig)
 		g_exit_status = 130;
 		write(1, "\n", 1);
 		rl_on_new_line();
-//		rl_replace_line("", 0); pour macos
+#ifdef __linux__
+		rl_replace_line("", 0);
+#endif
 		rl_redisplay();
 	}
 }
