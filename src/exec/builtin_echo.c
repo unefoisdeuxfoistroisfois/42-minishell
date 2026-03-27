@@ -1,8 +1,5 @@
 #include "minishell.h"
 
-/*
-** Vérifie si l'argument est -n (ou -nnn, -nnnn, etc.)
-*/
 static int	ft_is_n_flag(char *arg)
 {
 	int	i;
@@ -19,10 +16,6 @@ static int	ft_is_n_flag(char *arg)
 	return (i > 1);
 }
 
-/*
-** echo [-n] [args...]
-** -n : pas de newline à la fin
-*/
 int	ft_builtin_echo(t_cmd *cmd)
 {
 	int	i;

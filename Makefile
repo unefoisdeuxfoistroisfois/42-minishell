@@ -6,12 +6,12 @@ SRC = src/main.c \
       src/parsing/tokens.c \
       src/parsing/quotes.c \
       src/parsing/expand.c \
-	  src/parsing/expand_utils.c \
-	  src/parsing/syntax.c \
-	  src/parsing/error.c \
-	  src/parsing/parser.c \
-	  src/parsing/parser2.c \
-	  src/exec/exec.c \
+	src/parsing/expand_utils.c \
+	src/parsing/syntax.c \
+	src/parsing/error.c \
+	src/parsing/parser.c \
+	src/parsing/parser2.c \
+	src/exec/exec.c \
       src/exec/exec_simple.c \
       src/exec/exec_pipeline.c \
       src/exec/exec_cmd.c \

@@ -1,9 +1,5 @@
 #include "minishell.h"
 
-/*
-** cd [path]
-** Sans argument → va à $HOME
-*/
 int	ft_builtin_cd(t_cmd *cmd)
 {
 	char	*target;

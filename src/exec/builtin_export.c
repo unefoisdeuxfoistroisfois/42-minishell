@@ -18,12 +18,6 @@ static void	ft_print_export(void)
 	}
 }
 
-/*
-** export [NAME=value]
-** Sans argument → affiche les variables
-** Avec argument → ajoute/modifie la variable
-** Note: setenv() n'est pas autorisé, il faudra gérer manuellement
-*/
 int	ft_builtin_export(t_cmd *cmd)
 {
 	if (!cmd->args[1])
