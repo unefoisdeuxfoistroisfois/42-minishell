@@ -60,14 +60,17 @@ typedef struct s_shell
 }	t_shell;
 
 /* ps1.c */
+int		ft_handle_null_line(char *line);
+int		ft_handle_quotes_error(char *line);
+int		ft_handle_syntax_error(t_list *list, char *line);
 void	ft_ps1(t_shell *shell);
 
 /* args.c */
 int		ft_space(char *str, int index);
 int		ft_word(char *str, int index);
 void	ft_add_operator_token(t_list **list, char *line, int *i);
-void	ft_add_word_token(t_list **list, char *line, int *i);
-t_list	*ft_lexer(char *line);
+void	ft_add_word_token(t_list **list, char *line, int *i, char **env);
+t_list	*ft_lexer(char *line, char **env);
 
 /* tokens.c */
 t_token	*ft_create_token(char *value, int type);
@@ -77,13 +80,14 @@ void	ft_print_tokens(t_list *list);
 
 /* quotes.c */
 int		ft_check_quotes(char *str);
+void	ft_process_char(char *str, int i, char *quote, int *is_quote);
 char	*ft_remove_quotes(char *str);
 
 /* expand.c */
 void	ft_update_quote(char c, char *quote);
-char	*ft_expand_var(char *str, int *i, char *result);
-char	*ft_expand_str(char *str);
-char	*ft_get_var_value(char *str, int start, int len);
+char	*ft_expand_var(char *str, int *i, char *result, char **env);
+char	*ft_expand_str(char *str, char **env);
+char	*ft_get_var_value(char *str, int start, int len, char **env);
 int		ft_var_len(char *str, int start);
 
 /* expand_utils.c */
@@ -92,6 +96,9 @@ char	*ft_addchar(char *str, char c);
 int		ft_is_dollar(char *str);
 
 /* syntax.c */
+int		ft_check_pipe(t_token *token, t_token *prev);
+int		ft_check_redir(t_token *token, t_token *prev);
+int		ft_check_end(t_token *prev);
 int		ft_check_syntax(t_list *list);
 
 /* error.c */
@@ -106,10 +113,14 @@ t_cmd	*ft_create_cmd(void);
 
 /* parser2.c */
 char	**ft_add_word(char **args, char *word);
+void	ft_set_redir(t_cmd *cmd, t_token *token, t_token *next_token);
 void	ft_redir(t_cmd *cmd, t_list **list);
 
 /* free.c */
+void	ft_free_args(char **args);
+void	ft_free_cmd_fields(t_cmd *cmd);
 void	ft_free_cmd(t_cmd *cmd);
+void	ft_free_token(t_token *token);
 void	ft_free_tokens(t_list *list);
 
 /* exec.c */
