@@ -6,7 +6,7 @@
 /*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 08:17:39 by ouamarko          #+#    #+#             */
-/*   Updated: 2026/03/14 08:16:27 by ouamarko         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:41:21 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-char	**ft_get_path_dirs(void)
+char	**ft_get_path_dirs(t_shell *shell)
 {
 	char	*path_env;
 	char	**dirs;
 
-	path_env = getenv("PATH");
+	path_env = ft_getenv("PATH", shell->env);
 	if (!path_env)
 		return (NULL);
 	dirs = ft_split(path_env, ':');
@@ -52,7 +52,7 @@ char	*ft_build_path(char *dir, char *cmd)
 	return (full_path);
 }
 
-char	*ft_find_path(char *cmd)
+char	*ft_find_path(char *cmd, t_shell *shell)
 {
 	char	**dirs;
 	char	*path;
@@ -60,7 +60,7 @@ char	*ft_find_path(char *cmd)
 
 	if (!cmd || !cmd[0])
 		return (NULL);
-	dirs = ft_get_path_dirs();
+	dirs = ft_get_path_dirs(shell);
 	if (!dirs)
 		return (NULL);
 	i = 0;

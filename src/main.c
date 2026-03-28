@@ -13,15 +13,18 @@
 
 int	g_exit_status = 0;
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
+	t_shell	shell;
+
 	(void)argv;
+	shell.env = envp;
 	if (argc == 1)
 	{
 		ft_setup_signals();
 		while (1)
 		{
-			ft_ps1();
+			ft_ps1(&shell);
 		}
 		return (0);
 	}

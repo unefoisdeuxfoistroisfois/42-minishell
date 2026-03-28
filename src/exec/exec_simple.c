@@ -6,7 +6,7 @@
 /*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 14:26:35 by ouamarko          #+#    #+#             */
-/*   Updated: 2026/03/17 09:12:38 by ouamarko         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:41:21 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_restore_fds(int saved_stdin, int saved_stdout)
 	close(saved_stdout);
 }
 
-static int	ft_exec_builtin(t_cmd *cmd)
+static int	ft_exec_builtin(t_cmd *cmd, t_shell *shell)
 {
 	int	saved_stdin;
 	int	saved_stdout;
@@ -32,12 +32,12 @@ static int	ft_exec_builtin(t_cmd *cmd)
 		ft_restore_fds(saved_stdin, saved_stdout);
 		return (1);
 	}
-	g_exit_status = ft_run_builtin(cmd);
+	g_exit_status = ft_run_builtin(cmd, shell);
 	ft_restore_fds(saved_stdin, saved_stdout);
 	return (g_exit_status);
 }
 
-static int	ft_exec_external(t_cmd *cmd)
+static int	ft_exec_external(t_cmd *cmd, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
@@ -46,7 +46,7 @@ static int	ft_exec_external(t_cmd *cmd)
 	if (pid < 0)
 		return (perror("fork"), 1);
 	if (pid == 0)
-		ft_exec_cmd(cmd);
+		ft_exec_cmd(cmd, shell);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
@@ -55,7 +55,7 @@ static int	ft_exec_external(t_cmd *cmd)
 	return (g_exit_status);
 }
 
-int	ft_exec_simple(t_cmd *cmd)
+int	ft_exec_simple(t_cmd *cmd, t_shell *shell)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (0);
@@ -65,6 +65,6 @@ int	ft_exec_simple(t_cmd *cmd)
 			return (1);
 	}
 	if (ft_is_builtin(cmd->args[0]))
-		return (ft_exec_builtin(cmd));
-	return (ft_exec_external(cmd));
+		return (ft_exec_builtin(cmd, shell));
+	return (ft_exec_external(cmd, shell));
 }

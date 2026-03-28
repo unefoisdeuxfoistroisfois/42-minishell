@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-int	ft_builtin_cd(t_cmd *cmd)
+int	ft_builtin_cd(t_cmd *cmd, t_shell *shell)
 {
 	char	*target;
 
 	target = cmd->args[1];
 	if (!target)
 	{
-		target = getenv("HOME");
+		target = ft_getenv("HOME", shell->env);
 		if (!target)
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);

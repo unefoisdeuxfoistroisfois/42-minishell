@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:02:51 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/27 15:09:22 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:48:19 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*ft_strjoin_free(char *s1, char *s2)

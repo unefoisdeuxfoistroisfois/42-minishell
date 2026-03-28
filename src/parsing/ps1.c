@@ -45,7 +45,7 @@ static int	ft_handle_syntax_error(t_list *list, char *line)
 	return (0);
 }
 
-void	ft_ps1(void)
+void	ft_ps1(t_shell *shell)
 {
 	char	*line;
 	t_list	*list;
@@ -61,7 +61,7 @@ void	ft_ps1(void)
 	if (ft_handle_syntax_error(list, line))
 		return ;
 	cmd = ft_parser(list);
-	ft_execute(cmd);
+	ft_execute(cmd, shell);
 	ft_free_tokens(list);
 	ft_free_cmd(cmd);
 	free(line);

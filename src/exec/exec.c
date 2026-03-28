@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-int	ft_execute(t_cmd *cmds)
+int	ft_execute(t_cmd *cmds, t_shell *shell)
 {
 	if (!cmds)
 		return (0);
 	if (cmds->next)
-		return (ft_exec_pipeline(cmds));
-	return (ft_exec_simple(cmds));
+		return (ft_exec_pipeline(cmds, shell));
+	return (ft_exec_simple(cmds, shell));
 }

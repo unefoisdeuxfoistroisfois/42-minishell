@@ -6,13 +6,13 @@
 /*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:33:52 by ouamarko          #+#    #+#             */
-/*   Updated: 2026/03/15 10:58:14 by ouamarko         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:41:21 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
+void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd, t_shell *shell)
 {
 	if (input_fd != -1)
 	{
@@ -33,11 +33,11 @@ void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
 	if (ft_apply_redirections(cmd) < 0)
 		exit(1);
 	if (ft_is_builtin(cmd->args[0]))
-		exit(ft_run_builtin(cmd));
-	ft_exec_cmd(cmd);
+		exit(ft_run_builtin(cmd, shell));
+	ft_exec_cmd(cmd, shell);
 }
 
-int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
+int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd, t_shell *shell)
 {
 	pid_t	pid;
 
@@ -48,7 +48,7 @@ int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
 		return (-1);
 	}
 	if (pid == 0)
-		ft_pipe_child(cmd, input_fd, pipe_fd);
+		ft_pipe_child(cmd, input_fd, pipe_fd, shell);
 	return (0);
 }
 
@@ -71,7 +71,7 @@ int	ft_wait_all(void)
 	return (last_status);
 }
 
-int	ft_exec_pipeline(t_cmd *cmds)
+int	ft_exec_pipeline(t_cmd *cmds, t_shell *shell)
 {
 	int		pipe_fd[2];
 	int		input_fd;
@@ -83,7 +83,7 @@ int	ft_exec_pipeline(t_cmd *cmds)
 	{
 		if (cmd->next && pipe(pipe_fd) < 0)
 			return (perror("pipe"), 1);
-		if (ft_fork_pipe_cmd(cmd, input_fd, pipe_fd) < 0)
+		if (ft_fork_pipe_cmd(cmd, input_fd, pipe_fd, shell) < 0)
 			return (1);
 		if (input_fd != -1)
 			close(input_fd);
