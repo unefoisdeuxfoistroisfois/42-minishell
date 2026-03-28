@@ -1,6 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/03 15:22:31 by ouamarko          #+#    #+#             */
+/*   Updated: 2026/03/13 11:05:29 by ouamarko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-extern char	**environ;
+int	ft_env_len(void)
+{
+	int	i;
+
+	i = 0;
+	if (!environ)
+		return (0);
+	while (environ[i])
+		i++;
+	return (i);
+}
 
 int	ft_builtin_env(void)
 {

@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/07 13:29:02 by ouamarko          #+#    #+#             */
+/*   Updated: 2026/03/15 15:09:48 by ouamarko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-extern char	**environ;
-
-static int	ft_find_env(char *name)
+int	ft_find_env(char *name)
 {
 	int	i;
 	int	len;
@@ -19,7 +29,7 @@ static int	ft_find_env(char *name)
 	return (-1);
 }
 
-static void	ft_remove_env(int idx)
+void	ft_remove_env(int idx)
 {
 	while (environ[idx])
 	{

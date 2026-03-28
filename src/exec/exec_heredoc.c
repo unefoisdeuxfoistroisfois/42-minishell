@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_heredoc.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/14 16:08:47 by ouamarko          #+#    #+#             */
+/*   Updated: 2026/03/18 11:47:03 by ouamarko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int	ft_is_delimiter(char *line, char *delimiter)
+int	ft_is_delimiter(char *line, char *delimiter)
 {
 	int	len;
 
@@ -15,7 +27,7 @@ static int	ft_is_delimiter(char *line, char *delimiter)
 	return (0);
 }
 
-static void	ft_read_heredoc(int write_fd, char *delimiter)
+void	ft_read_heredoc(int write_fd, char *delimiter)
 {
 	char	*line;
 

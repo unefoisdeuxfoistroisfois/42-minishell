@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/10 11:38:17 by ouamarko          #+#    #+#             */
+/*   Updated: 2026/03/16 10:27:53 by ouamarko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-extern char	**environ;
-
-static void	ft_print_export(void)
+void	ft_print_export(void)
 {
 	int	i;
 
@@ -18,19 +28,7 @@ static void	ft_print_export(void)
 	}
 }
 
-static int	ft_env_len(void)
-{
-	int	i;
-
-	i = 0;
-	if (!environ)
-		return (0);
-	while (environ[i])
-		i++;
-	return (i);
-}
-
-static int	ft_find_env_index(char *name, int name_len)
+int	ft_find_env_index(char *name, int name_len)
 {
 	int	i;
 
@@ -45,11 +43,25 @@ static int	ft_find_env_index(char *name, int name_len)
 	return (-1);
 }
 
-static int	ft_add_or_update_env(char *arg)
+int	ft_create_new_env(char *arg, int len)
 {
 	char	**new_env;
 	int		i;
-	int		len;
+
+	new_env = malloc(sizeof(char *) * (len + 2));
+	if (!new_env)
+		return (1);
+	i = -1;
+	while (++i < len)
+		new_env[i] = environ[i];
+	new_env[i] = ft_strdup(arg);
+	new_env[i + 1] = NULL;
+	environ = new_env;
+	return (0);
+}
+
+int	ft_add_or_update_env(char *arg)
+{
 	int		name_len;
 	int		idx;
 
@@ -64,17 +76,7 @@ static int	ft_add_or_update_env(char *arg)
 		environ[idx] = ft_strdup(arg);
 		return (0);
 	}
-	len = ft_env_len();
-	new_env = malloc(sizeof(char *) * (len + 2));
-	if (!new_env)
-		return (1);
-	i = -1;
-	while (++i < len)
-		new_env[i] = environ[i];
-	new_env[i] = ft_strdup(arg);
-	new_env[i + 1] = NULL;
-	environ = new_env;
-	return (0);
+	return (ft_create_new_env(arg, ft_env_len()));
 }
 
 int	ft_builtin_export(t_cmd *cmd)

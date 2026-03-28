@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_path.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 08:17:39 by ouamarko          #+#    #+#             */
+/*   Updated: 2026/03/14 08:16:27 by ouamarko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_free_split(char **split)
@@ -27,7 +39,7 @@ char	**ft_get_path_dirs(void)
 	return (dirs);
 }
 
-static char	*ft_build_path(char *dir, char *cmd)
+char	*ft_build_path(char *dir, char *cmd)
 {
 	char	*tmp;
 	char	*full_path;

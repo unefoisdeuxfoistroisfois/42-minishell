@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_pipeline.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouamarko <ouamarko@student.42belgium.be>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 17:33:52 by ouamarko          #+#    #+#             */
+/*   Updated: 2026/03/15 10:58:14 by ouamarko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
+void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
 {
 	if (input_fd != -1)
 	{
@@ -25,7 +37,7 @@ static void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd)
 	ft_exec_cmd(cmd);
 }
 
-static int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
+int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
 {
 	pid_t	pid;
 
@@ -40,7 +52,7 @@ static int	ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd)
 	return (0);
 }
 
-static int	ft_wait_all(void)
+int	ft_wait_all(void)
 {
 	int		status;
 	int		last_status;
