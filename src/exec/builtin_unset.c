@@ -31,11 +31,13 @@ int	ft_find_env(char *name, t_shell *shell)
 
 void	ft_remove_env(int idx, t_shell *shell)
 {
-	while (shell->env[idx])
+	free(shell->env[idx]);
+	while (shell->env[idx + 1])
 	{
 		shell->env[idx] = shell->env[idx + 1];
 		idx++;
 	}
+	shell->env[idx] = NULL;
 }
 
 int	ft_builtin_unset(t_cmd *cmd, t_shell *shell)

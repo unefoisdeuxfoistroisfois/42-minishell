@@ -34,6 +34,11 @@ char	**ft_add_word(char **args, char *word)
 		i++;
 	}
 	new_args[i] = ft_strdup(word);
+	if (!new_args[i])
+	{
+		free(new_args);
+		return (NULL);
+	}
 	new_args[i + 1] = NULL;
 	if (args != NULL)
 		free(args);
@@ -43,19 +48,25 @@ char	**ft_add_word(char **args, char *word)
 void	ft_set_redir(t_cmd *cmd, t_token *token, t_token *next_token)
 {
 	if (token->type == REDIR_IN)
+	{
+		free(cmd->infile);
 		cmd->infile = ft_strdup(next_token->value);
+	}
 	else if (token->type == REDIR_OUT)
 	{
+		free(cmd->outfile);
 		cmd->outfile = ft_strdup(next_token->value);
 		cmd->append = 0;
 	}
 	else if (token->type == APPEND)
 	{
+		free(cmd->outfile);
 		cmd->outfile = ft_strdup(next_token->value);
 		cmd->append = 1;
 	}
 	else if (token->type == HEREDOC)
 	{
+		free(cmd->delimiter);
 		cmd->delimiter = ft_strdup(next_token->value);
 		cmd->heredoc = 1;
 	}

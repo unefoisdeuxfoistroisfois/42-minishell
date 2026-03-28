@@ -14,12 +14,40 @@
 
 int	g_exit_status = 0;
 
+char	**ft_dup_env(char **envp)
+{
+	char	**env;
+	int		i;
+
+	i = 0;
+	while (envp[i])
+		i++;
+	env = malloc(sizeof(char *) * (i + 1));
+	if (!env)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		env[i] = ft_strdup(envp[i]);
+		if (!env[i])
+		{
+			while (i > 0)
+				free(env[--i]);
+			free(env);
+			return (NULL);
+		}
+		i++;
+	}
+	env[i] = NULL;
+	return (env);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
 	(void)argv;
-	shell.env = envp;
+	shell.env = ft_dup_env(envp);
 	if (argc == 1)
 	{
 		ft_setup_signals();

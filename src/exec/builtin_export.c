@@ -55,7 +55,13 @@ int	ft_create_new_env(char *arg, int len, t_shell *shell)
 	while (++i < len)
 		new_env[i] = shell->env[i];
 	new_env[i] = ft_strdup(arg);
+	if (!new_env[i])
+	{
+		free(new_env);
+		return (1);
+	}
 	new_env[i + 1] = NULL;
+	free(shell->env);
 	shell->env = new_env;
 	return (0);
 }
@@ -73,6 +79,7 @@ int	ft_add_or_update_env(char *arg, t_shell *shell)
 	idx = ft_find_env_index(arg, name_len, shell);
 	if (idx >= 0)
 	{
+		free(shell->env[idx]);
 		shell->env[idx] = ft_strdup(arg);
 		return (0);
 	}
