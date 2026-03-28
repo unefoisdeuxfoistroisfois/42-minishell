@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:03:46 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/28 11:52:37 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:48 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 char	**ft_add_word(char **args, char *word)
@@ -39,7 +40,7 @@ char	**ft_add_word(char **args, char *word)
 	return (new_args);
 }
 
-static void	ft_set_redir(t_cmd *cmd, t_token *token, t_token *next_token)
+void	ft_set_redir(t_cmd *cmd, t_token *token, t_token *next_token)
 {
 	if (token->type == REDIR_IN)
 		cmd->infile = ft_strdup(next_token->value);

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:33:57 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/26 14:56:28 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:50 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
-static void	ft_free_args(char **args)
+void	ft_free_args(char **args)
 {
 	int	i;
 
@@ -26,7 +27,7 @@ static void	ft_free_args(char **args)
 	free(args);
 }
 
-static void	ft_free_cmd_fields(t_cmd *cmd)
+void	ft_free_cmd_fields(t_cmd *cmd)
 {
 	if (cmd->infile)
 		free(cmd->infile);
@@ -50,7 +51,7 @@ void	ft_free_cmd(t_cmd *cmd)
 	}
 }
 
-static void	ft_free_token(t_token *token)
+void	ft_free_token(t_token *token)
 {
 	if (token == NULL)
 		return ;

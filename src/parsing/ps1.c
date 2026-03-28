@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ps1.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:48:22 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/28 16:07:19 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:48 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
-static int	ft_handle_null_line(char *line)
+int	ft_handle_null_line(char *line)
 {
 	if (line == NULL)
 	{
@@ -21,7 +22,7 @@ static int	ft_handle_null_line(char *line)
 	return (0);
 }
 
-static int	ft_handle_quotes_error(char *line)
+int	ft_handle_quotes_error(char *line)
 {
 	if (ft_check_quotes(line) == 1)
 	{
@@ -33,7 +34,7 @@ static int	ft_handle_quotes_error(char *line)
 	return (0);
 }
 
-static int	ft_handle_syntax_error(t_list *list, char *line)
+int	ft_handle_syntax_error(t_list *list, char *line)
 {
 	if (ft_check_syntax(list) == 1)
 	{
@@ -57,7 +58,7 @@ void	ft_ps1(t_shell *shell)
 		add_history(line);
 	if (ft_handle_quotes_error(line))
 		return ;
-	list = ft_lexer(line);
+	list = ft_lexer(line, shell->env);
 	if (ft_handle_syntax_error(list, line))
 		return ;
 	cmd = ft_parser(list);

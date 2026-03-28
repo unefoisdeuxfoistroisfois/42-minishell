@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:17:39 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/25 17:41:16 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:46 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
-static int	ft_check_pipe(t_token *token, t_token *prev)
+int	ft_check_pipe(t_token *token, t_token *prev)
 {
 	if (token->type == PIPE && prev == NULL)
 	{
@@ -26,7 +27,7 @@ static int	ft_check_pipe(t_token *token, t_token *prev)
 	return (0);
 }
 
-static int	ft_check_redir(t_token *token, t_token *prev)
+int	ft_check_redir(t_token *token, t_token *prev)
 {
 	if (prev != NULL && (prev->type >= REDIR_IN && prev->type <= APPEND))
 	{
@@ -39,7 +40,7 @@ static int	ft_check_redir(t_token *token, t_token *prev)
 	return (0);
 }
 
-static int	ft_check_end(t_token *prev)
+int	ft_check_end(t_token *prev)
 {
 	if (prev != NULL && prev->type != WORD)
 	{
@@ -59,13 +60,19 @@ int	ft_check_syntax(t_list *list)
 	{
 		token = (t_token *)list->content;
 		if (ft_check_pipe(token, prev))
+		{
 			return (1);
+		}
 		if (ft_check_redir(token, prev))
+		{
 			return (1);
+		}
 		prev = token;
 		list = list->next;
 	}
 	if (ft_check_end(prev))
+	{
 		return (1);
+	}
 	return (0);
 }

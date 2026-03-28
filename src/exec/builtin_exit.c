@@ -42,14 +42,14 @@ int	ft_builtin_exit(t_cmd *cmd)
 	{
 		if (!ft_is_numeric(cmd->args[1]))
 		{
-			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd("minibiendur: exit: ", 2);
 			ft_putstr_fd(cmd->args[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			exit(2);
 		}
 		if (cmd->args[2])
 		{
-			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			ft_putstr_fd("minibiendur: exit: too many arguments\n", 2);
 			return (1);
 		}
 		code = ft_atoi(cmd->args[1]);

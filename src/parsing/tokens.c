@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:38:05 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/24 16:12:48 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:45 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 t_token	*ft_create_token(char *value, int type)

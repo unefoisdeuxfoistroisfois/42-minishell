@@ -19,7 +19,7 @@ int	ft_open_infile(t_cmd *cmd)
 	fd = open(cmd->infile, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("minibiendur: ", 2);
 		perror(cmd->infile);
 		return (-1);
 	}
@@ -46,7 +46,7 @@ int	ft_open_outfile(t_cmd *cmd)
 	fd = open(cmd->outfile, flags, 0644);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("minibiendur: ", 2);
 		perror(cmd->outfile);
 		return (-1);
 	}

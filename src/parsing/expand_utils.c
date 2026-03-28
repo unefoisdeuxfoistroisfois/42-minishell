@@ -6,7 +6,7 @@
 /*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:02:51 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/28 19:48:19 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:51 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ char	*ft_addchar(char *str, char c)
 	len = ft_strlen(str);
 	result = malloc(len + 2);
 	if (result == NULL)
+	{
 		return (NULL);
+	}
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -51,7 +53,9 @@ int	ft_is_dollar(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$')
+		{
 			return (1);
+		}
 		i++;
 	}
 	return (0);

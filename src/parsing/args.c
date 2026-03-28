@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: britela- <britela-@student.42belgium.be>   +#+  +:+       +#+        */
+/*   By: britela- <britela-@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 10:22:14 by britela-          #+#    #+#             */
-/*   Updated: 2026/03/25 09:47:31 by britela-         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:59:52 by britela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_space(char *str, int index)
@@ -56,7 +57,7 @@ void	ft_add_operator_token(t_list **list, char *line, int *i)
 	*i = *i + op_size;
 }
 
-void	ft_add_word_token(t_list **list, char *line, int *i)
+void	ft_add_word_token(t_list **list, char *line, int *i, char **env)
 {
 	char	*value;
 	char	*tmp;
@@ -68,7 +69,7 @@ void	ft_add_word_token(t_list **list, char *line, int *i)
 	*i = ft_word(line, *i);
 	value = ft_substr(line, start, *i - start);
 	tmp = value;
-	value = ft_expand_str(value);
+	value = ft_expand_str(value, env);
 	free(tmp);
 	tmp = value;
 	value = ft_remove_quotes(value);
@@ -78,7 +79,7 @@ void	ft_add_word_token(t_list **list, char *line, int *i)
 	ft_lstadd_back(list, node);
 }
 
-t_list	*ft_lexer(char *line)
+t_list	*ft_lexer(char *line, char **env)
 {
 	t_list	*list;
 	int		i;
@@ -95,7 +96,7 @@ t_list	*ft_lexer(char *line)
 		else if (ft_operateur(line, i) != 0)
 			ft_add_operator_token(&list, line, &i);
 		else
-			ft_add_word_token(&list, line, &i);
+			ft_add_word_token(&list, line, &i, env);
 	}
 	return (list);
 }

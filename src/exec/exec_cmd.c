@@ -14,7 +14,7 @@
 
 void	ft_cmd_error(char *cmd, int code)
 {
-	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("minibiendur: ", 2);
 	ft_putstr_fd(cmd, 2);
 	if (code == 127)
 		ft_putstr_fd(": command not found\n", 2);
