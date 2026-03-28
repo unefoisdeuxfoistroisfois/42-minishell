@@ -24,8 +24,6 @@
 # include <readline/history.h>
 # include "../Libft/libft.h"
 
-extern char	**environ;
-
 extern int	g_exit_status;
 
 typedef enum e_token_type
@@ -55,7 +53,12 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-void	ft_ps1(void);
+typedef struct s_shell
+{
+	char	**env;
+}	t_shell;
+
+void	ft_ps1(t_shell *shell);
 t_list	*ft_lexer(char *line);
 int		ft_space(char *str, int index);
 int		ft_word(char *str, int index);
@@ -84,12 +87,12 @@ t_cmd	*ft_parse_cmd(t_list **list);
 t_cmd	*ft_parser(t_list *list);
 void	ft_redir(t_cmd *cmd, t_list **list);
 char	**ft_add_word(char **args, char *word);
-int		ft_execute(t_cmd *cmds);
-int		ft_exec_simple(t_cmd *cmd);
-void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd);
-int		ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd);
+int		ft_execute(t_cmd *cmds, t_shell *shell);
+int		ft_exec_simple(t_cmd *cmd, t_shell *shell);
+void	ft_pipe_child(t_cmd *cmd, int input_fd, int *pipe_fd, t_shell *shell);
+int		ft_fork_pipe_cmd(t_cmd *cmd, int input_fd, int *pipe_fd, t_shell *shell);
 int		ft_wait_all(void);
-int		ft_exec_pipeline(t_cmd *cmds);
+int		ft_exec_pipeline(t_cmd *cmds, t_shell *shell);
 int		ft_apply_redirections(t_cmd *cmd);
 int		ft_open_infile(t_cmd *cmd);
 int		ft_open_outfile(t_cmd *cmd);
@@ -97,27 +100,28 @@ int		ft_is_delimiter(char *line, char *delimiter);
 void	ft_read_heredoc(int write_fd, char *delimiter);
 int		ft_handle_heredoc(t_cmd *cmd);
 void	ft_free_split(char **split);
-char	**ft_get_path_dirs(void);
+char	**ft_get_path_dirs(t_shell *shell);
 char	*ft_build_path(char *dir, char *cmd);
-char	*ft_find_path(char *cmd);
+char	*ft_find_path(char *cmd, t_shell *shell);
 void	ft_cmd_error(char *cmd, int code);
-void	ft_exec_cmd(t_cmd *cmd);
+void	ft_exec_cmd(t_cmd *cmd, t_shell *shell);
 int		ft_is_builtin(char *name);
-int		ft_run_builtin(t_cmd *cmd);
+int		ft_run_builtin(t_cmd *cmd, t_shell *shell);
 int		ft_is_n_flag(char *arg);
 int		ft_builtin_echo(t_cmd *cmd);
-int		ft_builtin_cd(t_cmd *cmd);
+int		ft_builtin_cd(t_cmd *cmd, t_shell *shell);
 int		ft_builtin_pwd(void);
-int		ft_env_len(void);
-int		ft_builtin_env(void);
-void	ft_print_export(void);
-int		ft_find_env_index(char *name, int name_len);
-int		ft_create_new_env(char *arg, int len);
-int		ft_add_or_update_env(char *arg);
-int		ft_builtin_export(t_cmd *cmd);
-int		ft_find_env(char *name);
-void	ft_remove_env(int idx);
-int		ft_builtin_unset(t_cmd *cmd);
+int		ft_env_len(t_shell *shell);
+int		ft_builtin_env(t_shell *shell);
+char	*ft_getenv(char *name, char **env);
+void	ft_print_export(t_shell *shell);
+int		ft_find_env_index(char *name, int name_len, t_shell *shell);
+int		ft_create_new_env(char *arg, int len, t_shell *shell);
+int		ft_add_or_update_env(char *arg, t_shell *shell);
+int		ft_builtin_export(t_cmd *cmd, t_shell *shell);
+int		ft_find_env(char *name, t_shell *shell);
+void	ft_remove_env(int idx, t_shell *shell);
+int		ft_builtin_unset(t_cmd *cmd, t_shell *shell);
 int		ft_is_numeric(char *str);
 int		ft_builtin_exit(t_cmd *cmd);
 void	ft_setup_signals(void);
