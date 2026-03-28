@@ -29,7 +29,7 @@ t_cmd	*ft_parser(t_list *list)
 
 t_cmd	*ft_parse_cmd(t_list **list)
 {
-    t_cmd	*cmd;
+	t_cmd	*cmd;
 	t_token	*token;
 
 	cmd = ft_create_cmd();
@@ -59,9 +59,9 @@ t_cmd	*ft_create_cmd(void)
 
 	cmd = malloc(sizeof(t_cmd));
 	if (cmd == NULL)
-    {
+	{
 		return (NULL);
-    }
+	}
 	cmd->args = NULL;
 	cmd->infile = NULL;
 	cmd->outfile = NULL;

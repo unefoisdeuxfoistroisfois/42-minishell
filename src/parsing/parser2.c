@@ -28,16 +28,8 @@ char	**ft_add_word(char **args, char *word)
 	return (new_args);
 }
 
-void	ft_redir(t_cmd *cmd, t_list **list)
+static void	ft_set_redir(t_cmd *cmd, t_token *token, t_token *next_token)
 {
-	t_token	*token;
-	t_token	*next_token;
-
-	token = (t_token *)(*list)->content;
-	*list = (*list)->next;
-	if (*list == NULL)
-		return ;
-	next_token = (t_token *)(*list)->content;
 	if (token->type == REDIR_IN)
 		cmd->infile = ft_strdup(next_token->value);
 	else if (token->type == REDIR_OUT)
@@ -55,5 +47,18 @@ void	ft_redir(t_cmd *cmd, t_list **list)
 		cmd->delimiter = ft_strdup(next_token->value);
 		cmd->heredoc = 1;
 	}
+}
+
+void	ft_redir(t_cmd *cmd, t_list **list)
+{
+	t_token	*token;
+	t_token	*next_token;
+
+	token = (t_token *)(*list)->content;
+	*list = (*list)->next;
+	if (*list == NULL)
+		return ;
+	next_token = (t_token *)(*list)->content;
+	ft_set_redir(cmd, token, next_token);
 	*list = (*list)->next;
 }
