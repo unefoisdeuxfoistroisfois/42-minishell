@@ -11,6 +11,7 @@ SRC = src/main.c \
 	src/parsing/error.c \
 	src/parsing/parser.c \
 	src/parsing/parser2.c \
+      src/parsing/free.c \
 	src/exec/exec.c \
       src/exec/exec_simple.c \
       src/exec/exec_pipeline.c \
