@@ -14,11 +14,6 @@ The project is split between two parts: **britela-** handled parsing (lexer, tok
 
 - `cc`, `make`, `readline` library
 
-On Debian/Ubuntu:
-```bash
-sudo apt install libreadline-dev
-```
-
 On macOS (with Homebrew):
 ```bash
 brew install readline
